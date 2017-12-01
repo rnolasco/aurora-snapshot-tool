@@ -16,10 +16,20 @@
 			"Default": "24",
 			"Description": "Interval for backups in hours. Default is 24"
 		},
-		"DestinationAccount": {
+		"DestinationAccount1": {
 			"Type": "Number",
 			"Default": "000000000000",
-			"Description": "Destination account with no dashes."
+			"Description": "Destination account 1 with no dashes."
+		},
+		"DestinationAccount2": {
+			"Type": "Number",
+			"Default": "000000000000",
+			"Description": "Destination account 2 with no dashes."
+		},
+		"DestinationAccount3": {
+			"Type": "Number",
+			"Default": "000000000000",
+			"Description": "Destination account 3 with no dashes."
 		},
 		"ShareSnapshots": {
 			"Type": "String",
@@ -338,8 +348,14 @@
 				"MemorySize" : 512,
 				"Environment": {
 					"Variables": {
-						"DEST_ACCOUNT": {
-							"Ref": "DestinationAccount"
+						"DEST_ACCOUNT1": {
+							"Ref": "DestinationAccount1"
+						},
+						"DEST_ACCOUNT2": {
+							"Ref": "DestinationAccount2"
+						},
+						"DEST_ACCOUNT3": {
+							"Ref": "DestinationAccount3"
 						},
 						"LOG_LEVEL": {
 							"Ref": "LogLevel"

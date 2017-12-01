@@ -23,7 +23,11 @@ import re
 # Initialize everything
 _LOGLEVEL = os.getenv('LOG_LEVEL', 'ERROR').strip()
 
-_DEST_ACCOUNTID = str(os.getenv('DEST_ACCOUNT', '000000000000')).strip()
+_DEST_ACCOUNTID1 = str(os.getenv('DEST_ACCOUNT1', '000000000000')).strip()
+
+_DEST_ACCOUNTID2 = str(os.getenv('DEST_ACCOUNT2', '000000000000')).strip()
+
+_DEST_ACCOUNTID3 = str(os.getenv('DEST_ACCOUNT3', '000000000000')).strip()
 
 _DESTINATION_REGION = os.getenv(
     'DEST_REGION', os.getenv('AWS_DEFAULT_REGION')).strip()

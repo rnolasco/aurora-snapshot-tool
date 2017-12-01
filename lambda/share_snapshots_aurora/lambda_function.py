@@ -1,15 +1,21 @@
 '''
 Copyright 2017 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
-Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file except in compliance with the License. A copy of the License is located at
+Licensed under the Apache License, Version 2.0 (the "License"). You may not
+use this file except in compliance with the License. A copy of the License is
+located at
 
     http://aws.amazon.com/apache2.0/
 
-or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
+or in the "license" file accompanying this file. This file is distributed on
+an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+or implied. See the License for the specific language governing permissions
+and limitations under the License.
 '''
 
 # share_snapshots_aurora
-# This Lambda function shares snapshots created by aurora_take_snapshot with the account set in the environment variable DEST_ACCOUNT
+# This Lambda function shares snapshots created by aurora_take_snapshot with
+#   the account set in the environment variable DEST_ACCOUNTs
 # It will only share snapshots tagged with shareAndCopy and a value of YES
 import boto3
 from datetime import datetime
@@ -22,7 +28,9 @@ from snapshots_tool_utils import *
 
 # Initialize from environment variable
 LOGLEVEL = os.getenv('LOG_LEVEL', 'ERROR').strip()
-DEST_ACCOUNTID = str(os.getenv('DEST_ACCOUNT', '000000000000')).strip()
+DEST_ACCOUNTID1 = str(os.getenv('DEST_ACCOUNT1', '000000000000')).strip()
+DEST_ACCOUNTID2 = str(os.getenv('DEST_ACCOUNT2', '000000000000')).strip()
+DEST_ACCOUNTID3 = str(os.getenv('DEST_ACCOUNT3', '000000000000')).strip()
 PATTERN = os.getenv('PATTERN', 'ALL_CLUSTERS')
 
 if os.getenv('REGION_OVERRIDE', 'NO') != 'NO':
@@ -50,12 +58,12 @@ def lambda_handler(event, context):
 
         if snapshot_object['Status'].lower() == 'available' and search_tag_share(response_tags):
             try:
-                # Share snapshot with dest_account
+                # Share snapshot with dest_accounts
                 response_modify = client.modify_db_cluster_snapshot_attribute(
                     DBClusterSnapshotIdentifier=snapshot_identifier,
                     AttributeName='restore',
                     ValuesToAdd=[
-                        DEST_ACCOUNTID
+                        DEST_ACCOUNTID1, DEST_ACCOUNTID2, DEST_ACCOUNTID3
                     ]
                 )
             except Exception:
