@@ -13,11 +13,11 @@ snapshot_tool_aurora_dest.json needs to run in the destination account (or the a
 ### Source Account
 #### Components
 The following components will be created in the source account: 
-* 3 Lambda functions (TakeSnapshotsAurora, ShareSnapshotsAurora, DeleteOldSnapshotsAurora)
-* 3 State Machines (Amazon Step Functions) to trigger execution of each Lambda function (stateMachineTakeSnapshotAurora, stateMachineShareSnapshotAurora, stateMachineDeleteOldSnapshotsAurora)
-* 3 Cloudwatch Event Rules to trigger the state functions
-* 3 Cloudwatch Alarms and associated SNS Topics to alert on State Machines failures
 * A Cloudformation stack containing all these resources
+* 3 Cloudwatch Event Rules to trigger the state functions
+* 3 State Machines (Amazon Step Functions) to trigger execution of each Lambda function (stateMachineTakeSnapshotAurora, stateMachineShareSnapshotAurora, stateMachineDeleteOldSnapshotsAurora)
+* 3 Lambda functions (TakeSnapshotsAurora, ShareSnapshotsAurora, DeleteOldSnapshotsAurora)
+* 3 Cloudwatch Alarms and associated SNS Topics to alert on State Machines failures
 
 #### Installing in the source account 
 Run snapshot_tool_aurora_source.json on the Cloudformation console. 
@@ -43,11 +43,11 @@ Here is a break down of each parameter for the source template:
 ### Destination Account
 #### Components
 The following components will be created in the destination account: 
-* 2 Lambda functions (CopySnapshotsDestAurora, DeleteOldSnapshotsDestAurora)
-* 2 State Machines (Amazon Step Functions) to trigger execution of each Lambda function (stateMachineCopySnapshotsDestAurora, stateMachineDeleteOldSnapshotsDestAurora)
-* 2 Cloudwatch Event Rules to trigger the state functions
-* 2 Cloudwatch Alarms and associated SNS Topics to alert on State Machines failures
 * A Cloudformation stack containing all these resources
+* 2 Cloudwatch Event Rules to trigger the state functions
+* 2 State Machines (Amazon Step Functions) to trigger execution of each Lambda function (stateMachineCopySnapshotsDestAurora, stateMachineDeleteOldSnapshotsDestAurora)
+* 2 Lambda functions (CopySnapshotsDestAurora, DeleteOldSnapshotsDestAurora)
+* 2 Cloudwatch Alarms and associated SNS Topics to alert on State Machines failures
 
 On your destination account, you will need to run snapshot_tool_aurora_dest.json on the Cloudformation. As before, you will need to run it in a region where Step Functions is available. 
 The following parameters are available:
